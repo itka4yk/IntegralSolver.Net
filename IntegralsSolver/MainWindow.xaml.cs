@@ -1,17 +1,10 @@
-﻿using System;
+﻿using IntegralsSolver.models;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace IntegralsSolver
 {
@@ -23,6 +16,22 @@ namespace IntegralsSolver
         public MainWindow()
         {
             InitializeComponent();
+
+            Formulas = new FormulaProvider("Formulas.json").GetFormulas();
+            FormulasCombobox.ItemsSource = Formulas.Select(f => f.Representation);
+        }
+
+        public List<Formula> Formulas { get; }
+
+        private void HandleFormulaSelection(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var cbx = (ComboBox)sender;
+            var selectedFormula = Formulas[cbx.SelectedIndex];
+            FormulaVariablesStack.Children.Clear();
+            selectedFormula.VariableNames.ToList().ForEach(v => {
+                FormulaVariablesStack.Children.Add(new Label { Content = v });
+                FormulaVariablesStack.Children.Add(new TextBox { Text = "1" });
+            });
         }
     }
 }
