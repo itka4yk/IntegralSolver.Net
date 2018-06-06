@@ -1,6 +1,6 @@
-﻿using Extensions;
-using IntegralsSolver.Helpers;
+﻿using IntegralsSolver.Helpers;
 using System.Threading.Tasks;
+using IntegralsSolver.Extensions;
 using Math = org.mariuszgromada.math.mxparser;
 
 namespace IntegralsSolver.Algorithms
@@ -10,8 +10,8 @@ namespace IntegralsSolver.Algorithms
     {
         public async Task<double> Calculate(double from, double to, int n, Math.Expression func)
         {
-            double area = 0.0;
-            double dx = (to - from) / n;
+            var area = 0.0;
+            var dx = (to - from) / n;
 
             await Task.Run(() =>
             {

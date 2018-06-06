@@ -1,7 +1,7 @@
-﻿using Extensions;
-using IntegralsSolver.Helpers;
+﻿using IntegralsSolver.Helpers;
 using org.mariuszgromada.math.mxparser;
 using System.Threading.Tasks;
+using IntegralsSolver.Extensions;
 
 namespace IntegralsSolver.Algorithms
 {
@@ -16,7 +16,7 @@ namespace IntegralsSolver.Algorithms
 
             await Task.Run(() =>
             {
-                for (int i = 1; i <= n; i++)
+                for (var i = 1; i <= n; i++)
                     sum += func.CalculateWith(from + i * dx);
             });
 
