@@ -20,12 +20,12 @@
         <Label Content="Algorithm type:" HorizontalAlignment="Left" Margin="310,14,0,0" VerticalAlignment="Top"/>
         <Button Content="Solve" HorizontalAlignment="Left" Margin="645,14,0,0" VerticalAlignment="Top" Width="126" Click="HandleIntegralSolvingClick" Height="22"/>
         <Label Content="From" HorizontalAlignment="Left" Margin="311,49,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="354,52,0,0" TextWrapping="Wrap" Text="{Binding From, Mode=TwoWay}" VerticalAlignment="Top" Width="67"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="354,52,0,0" TextWrapping="Wrap" Text="{Binding From, Mode=TwoWay}" VerticalAlignment="Top" Width="67" PreviewTextInput="NumberValidationTextBox"/>
         <Label Content="To" HorizontalAlignment="Left" Margin="432,49,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="475,52,0,0" TextWrapping="Wrap" Text="{Binding To, Mode=TwoWay}" VerticalAlignment="Top" Width="68"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="475,52,0,0" TextWrapping="Wrap" Text="{Binding To, Mode=TwoWay}" VerticalAlignment="Top" Width="68" PreviewTextInput="NumberValidationTextBox"/>
         <Label Content="Result:" HorizontalAlignment="Left" Margin="310,80,0,0" VerticalAlignment="Top"/>
         <Label Content="0" HorizontalAlignment="Left" Margin="366,80,0,0" VerticalAlignment="Top" x:Name="ResultLabel"/>
         <Label Content="Subdivisions" HorizontalAlignment="Left" Margin="556,49,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="645,52,0,0" TextWrapping="Wrap" Text="{Binding SubdivisionsCount, Mode=TwoWay}" VerticalAlignment="Top" Width="76"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="645,52,0,0" TextWrapping="Wrap" Text="{Binding SubdivisionsCount, Mode=TwoWay}" VerticalAlignment="Top" Width="76" PreviewTextInput="NumberValidationTextBox"/>
     </Grid>
 </Window>

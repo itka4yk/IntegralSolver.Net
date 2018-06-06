@@ -5,9 +5,11 @@ using OxyPlot;
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Input;
 using Math = org.mariuszgromada.math.mxparser;
 
 namespace IntegralsSolver
@@ -54,7 +56,7 @@ namespace IntegralsSolver
             _ctx.IntegralStrategy = (IIntegralStrategy)Activator.CreateInstance(selectedStrategyType);
         }
 
-        private void HandleIntegralSolvingClick(object sender, RoutedEventArgs e)
+        private async void HandleIntegralSolvingClick(object sender, RoutedEventArgs e)
         {
             if (_ctx.IntegralStrategy == null) return;
             var vars = FormulaVariablesStack.Children.OfType<TextBox>().Select(t => t.Text).ToList();
@@ -65,17 +67,32 @@ namespace IntegralsSolver
 
             var from = Convert.ToInt32(_ctx.From);
             var to = Convert.ToInt32(_ctx.To);
-            _ctx.Points.Clear();
-            for (var i = from; i <= to; i++)
-            {
-                func.addArguments(new Math.Argument($"x = {i}"));
-                _ctx.Points.Add(new DataPoint(i, func.calculate()));
-                func.removeAllArguments();
-            }
-            FuncPlot.InvalidatePlot(true);
 
-            var result = _ctx.IntegralStrategy.Calculate(from, to, Convert.ToInt32(_ctx.SubdivisionsCount), func);
+
+            var result = await _ctx.IntegralStrategy.Calculate(from, to, Convert.ToInt32(_ctx.SubdivisionsCount), func);
+            await RefreshPlot(func, from, to);
             ResultLabel.Content = result.ToString();
+        }
+
+        private async Task RefreshPlot(Math.Expression func, double from, double to)
+        {
+            _ctx.Points.Clear();
+            await Task.Run(() =>
+            {
+                for (var i = from; i <= to; i++)
+                {
+                    func.addArguments(new Math.Argument($"x = {i}"));
+                    _ctx.Points.Add(new DataPoint(i, func.calculate()));
+                    func.removeAllArguments();
+                }
+            });
+            FuncPlot.InvalidatePlot(true);
+        }
+
+        public void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
+            e.Handled = !regex.IsMatch(e.Text);
         }
     }
 }
