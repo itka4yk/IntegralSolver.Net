@@ -1,7 +1,7 @@
 ﻿using System;
 using Math = org.mariuszgromada.math.mxparser;
 
-namespace IntegralsSolver.algorythms
+namespace IntegralsSolver.Algorithms
 {
     public interface IIntegralStrategy
     {

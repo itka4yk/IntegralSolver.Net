@@ -1,4 +1,6 @@
-﻿using IntegralsSolver.algorythms;
+﻿using IntegralsSolver.Algorithms;
+using IntegralsSolver.Helpers;
+using IntegralsSolver.Models;
 using OxyPlot;
 using System;
 using System.Linq;
@@ -25,13 +27,13 @@ namespace IntegralsSolver
             _ctx = (MainWindowViewModel)DataContext;
             _ctx.Formulas = new FormulaProvider("Formulas.json").GetFormulas();
             FormulasCombobox.ItemsSource = _ctx.Formulas.Select(f => f.Representation);
-            
+
             _strategyTypes = GetType()
                 .Assembly
                 .DefinedTypes
                 .Where(t => t.ImplementedInterfaces.Any(i => i == typeof(IIntegralStrategy)))
                 .ToArray();
-            StrategyCombobox.ItemsSource = _strategyTypes.Select(s => s.Name);
+            StrategyCombobox.ItemsSource = _strategyTypes.Select(s => s.GetCustomAttribute<AlgorithmName>().Name);
         }
 
         private void HandleFormulaSelection(object sender, SelectionChangedEventArgs e)
@@ -48,7 +50,8 @@ namespace IntegralsSolver
         private void HandleStrategySelection(object sender, SelectionChangedEventArgs e)
         {
             var cbx = (ComboBox)sender;
-            _ctx.IntegralStrategy = (IIntegralStrategy)Activator.CreateInstance(_strategyTypes.FirstOrDefault(s => s.Name == cbx.SelectedValue.ToString()));
+            var selectedStrategyType = _strategyTypes.FirstOrDefault(s => s.GetCustomAttribute<AlgorithmName>().Name == cbx.SelectedValue.ToString());
+            _ctx.IntegralStrategy = (IIntegralStrategy)Activator.CreateInstance(selectedStrategyType);
         }
 
         private void HandleIntegralSolvingClick(object sender, RoutedEventArgs e)
@@ -56,10 +59,10 @@ namespace IntegralsSolver
             if (_ctx.IntegralStrategy == null) return;
             var vars = FormulaVariablesStack.Children.OfType<TextBox>().Select(t => t.Text).ToList();
             var func = new Math.Expression(_ctx.Formula.Representation);
+
             for (int i = 0; i < vars.Count(); i++)
-            {
                 func.addConstants(new Math.Constant($"{_ctx.Formula.VariableNames[i]} = {Convert.ToDouble(vars[i])}"));
-            }
+
             var from = Convert.ToInt32(_ctx.From);
             var to = Convert.ToInt32(_ctx.To);
             _ctx.Points.Clear();
@@ -71,7 +74,7 @@ namespace IntegralsSolver
             }
             FuncPlot.InvalidatePlot(true);
 
-            var result = _ctx.IntegralStrategy.Calculate(from, to, 10, func);
+            var result = _ctx.IntegralStrategy.Calculate(from, to, Convert.ToInt32(_ctx.SubdivisionsCount), func);
             ResultLabel.Content = result.ToString();
         }
     }

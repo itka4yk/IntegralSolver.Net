@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using IntegralsSolver.models;
+﻿using IntegralsSolver.Models;
+using System.Collections.Generic;
 
 namespace IntegralsSolver
 {

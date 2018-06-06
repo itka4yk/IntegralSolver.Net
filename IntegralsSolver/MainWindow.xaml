@@ -8,22 +8,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="519.665" Width="800">
     <Grid>
-        <oxy:Plot Title="{Binding Title}" Margin="302,128,0,52" x:Name="FuncPlot">
+        <oxy:Plot Margin="302,128,0,0" x:Name="FuncPlot" Height="351" VerticalAlignment="Top">
             <oxy:Plot.Series>
                 <oxy:LineSeries ItemsSource="{Binding Points}"/>
             </oxy:Plot.Series>
         </oxy:Plot>
         <ComboBox x:Name="FormulasCombobox" HorizontalAlignment="Left" Margin="91,14,0,0" VerticalAlignment="Top" Width="149" SelectionChanged="HandleFormulaSelection"/>
         <Label Content="Pick formula" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <StackPanel x:Name="FormulaVariablesStack" HorizontalAlignment="Left" Height="357" Margin="10,52,0,0" VerticalAlignment="Top" Width="276"/>
+        <StackPanel x:Name="FormulaVariablesStack" HorizontalAlignment="Left" Margin="10,52,0,10" Width="276"/>
         <ComboBox x:Name="StrategyCombobox" HorizontalAlignment="Left" Margin="442,14,0,0" VerticalAlignment="Top" Width="182" SelectionChanged="HandleStrategySelection"/>
-        <Label Content="Algorythm type:" HorizontalAlignment="Left" Margin="310,14,0,0" VerticalAlignment="Top"/>
-        <Button Content="Solve" HorizontalAlignment="Left" Margin="645,14,0,0" VerticalAlignment="Top" Width="126" Click="HandleIntegralSolvingClick" Height="54"/>
-        <Label Content="From" HorizontalAlignment="Left" Margin="366,85,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="409,88,0,0" TextWrapping="Wrap" Text="{Binding From, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="To" HorizontalAlignment="Left" Margin="551,85,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="594,88,0,0" TextWrapping="Wrap" Text="{Binding To, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Result:" HorizontalAlignment="Left" Margin="434,453,0,0" VerticalAlignment="Top"/>
-        <Label Content="0" HorizontalAlignment="Left" Margin="484,453,0,0" VerticalAlignment="Top" x:Name="ResultLabel"/>
+        <Label Content="Algorithm type:" HorizontalAlignment="Left" Margin="310,14,0,0" VerticalAlignment="Top"/>
+        <Button Content="Solve" HorizontalAlignment="Left" Margin="645,14,0,0" VerticalAlignment="Top" Width="126" Click="HandleIntegralSolvingClick" Height="22"/>
+        <Label Content="From" HorizontalAlignment="Left" Margin="311,49,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="354,52,0,0" TextWrapping="Wrap" Text="{Binding From, Mode=TwoWay}" VerticalAlignment="Top" Width="67"/>
+        <Label Content="To" HorizontalAlignment="Left" Margin="432,49,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="475,52,0,0" TextWrapping="Wrap" Text="{Binding To, Mode=TwoWay}" VerticalAlignment="Top" Width="68"/>
+        <Label Content="Result:" HorizontalAlignment="Left" Margin="310,80,0,0" VerticalAlignment="Top"/>
+        <Label Content="0" HorizontalAlignment="Left" Margin="366,80,0,0" VerticalAlignment="Top" x:Name="ResultLabel"/>
+        <Label Content="Subdivisions" HorizontalAlignment="Left" Margin="556,49,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="645,52,0,0" TextWrapping="Wrap" Text="{Binding SubdivisionsCount, Mode=TwoWay}" VerticalAlignment="Top" Width="76"/>
     </Grid>
 </Window>

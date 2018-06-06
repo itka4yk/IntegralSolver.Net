@@ -1,18 +1,14 @@
-﻿using IntegralsSolver.models;
+﻿using IntegralsSolver.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegralsSolver
 {
     public class FormulaProvider : IFormulaProvider
     {
         private readonly string _formulasPath;
-        private List<Formula> _formulas;
+        private readonly List<Formula> _formulas;
 
         public FormulaProvider(string formulasPath)
         {

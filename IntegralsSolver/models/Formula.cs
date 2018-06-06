@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IntegralsSolver.models
+namespace IntegralsSolver.Models
 {
     public class Formula
     {
