@@ -6,12 +6,9 @@
         xmlns:local="clr-namespace:IntegralsSolver"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
-        <local:MainViewModel/>
-    </Window.DataContext>
+        Title="MainWindow" Height="519.665" Width="800">
     <Grid>
-        <oxy:Plot Title="{Binding Title}" Margin="302,128,0,0">
+        <oxy:Plot Title="{Binding Title}" Margin="302,128,0,52" x:Name="FuncPlot">
             <oxy:Plot.Series>
                 <oxy:LineSeries ItemsSource="{Binding Points}"/>
             </oxy:Plot.Series>
@@ -19,8 +16,14 @@
         <ComboBox x:Name="FormulasCombobox" HorizontalAlignment="Left" Margin="91,14,0,0" VerticalAlignment="Top" Width="149" SelectionChanged="HandleFormulaSelection"/>
         <Label Content="Pick formula" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <StackPanel x:Name="FormulaVariablesStack" HorizontalAlignment="Left" Height="357" Margin="10,52,0,0" VerticalAlignment="Top" Width="276"/>
-        <ComboBox HorizontalAlignment="Left" Margin="443,52,0,0" VerticalAlignment="Top" Width="182"/>
-        <Label Content="Algorythm type:" HorizontalAlignment="Left" Margin="343,48,0,0" VerticalAlignment="Top"/>
-        <Button Content="Solve" HorizontalAlignment="Left" Margin="647,52,0,0" VerticalAlignment="Top" Width="102"/>
+        <ComboBox x:Name="StrategyCombobox" HorizontalAlignment="Left" Margin="442,14,0,0" VerticalAlignment="Top" Width="182" SelectionChanged="HandleStrategySelection"/>
+        <Label Content="Algorythm type:" HorizontalAlignment="Left" Margin="310,14,0,0" VerticalAlignment="Top"/>
+        <Button Content="Solve" HorizontalAlignment="Left" Margin="645,14,0,0" VerticalAlignment="Top" Width="126" Click="HandleIntegralSolvingClick" Height="54"/>
+        <Label Content="From" HorizontalAlignment="Left" Margin="366,85,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="409,88,0,0" TextWrapping="Wrap" Text="{Binding From, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="To" HorizontalAlignment="Left" Margin="551,85,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="594,88,0,0" TextWrapping="Wrap" Text="{Binding To, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Result:" HorizontalAlignment="Left" Margin="434,453,0,0" VerticalAlignment="Top"/>
+        <Label Content="0" HorizontalAlignment="Left" Margin="484,453,0,0" VerticalAlignment="Top" x:Name="ResultLabel"/>
     </Grid>
 </Window>

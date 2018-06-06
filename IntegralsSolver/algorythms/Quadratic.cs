@@ -1,30 +1,30 @@
 ﻿using System;
 using Math = org.mariuszgromada.math.mxparser;
 
-namespace metoda_prostokatow_cs
+namespace IntegralsSolver.algorythms
 {
     /// <summary>
     /// Calkowanie numeryczne - metoda prostokatow
     /// </summary>
-    class Metoda_prostokatow
+    public class QuadraticAlgorythm: IIntegralStrategy
     {        /// <summary>
         /// Oblicza calke metoda prostokatow w przedziale od xp do xk z dokladnoscia n dla funkcji fun
         /// </summary>
-        /// <param name="xp">poczatek przedzialu calkowania</param>
-        /// <param name="xk">koniec przedzialu calkowania</param>
+        /// <param name="from">poczatek przedzialu calkowania</param>
+        /// <param name="to">koniec przedzialu calkowania</param>
         /// <param name="n">dokladnosc calkowania</param>
         /// <param name="func">funkcja calkowana</param>
         /// <returns></returns>
-        private static double calculate(double xp, double xk, int n, Math.Expression func)
+        public double Calculate(double from, double to, int n, Math.Expression func)
         {
-            double dx, calka;
+            var dx = (to - from) / (double)n;
 
-            dx = (xk - xp) / (double)n;
-
-            calka = 0;
+            var calka = 0.0;
             for (int i = 1; i <= n; i++)
             {
-                calka += func.calculate(xp + i * dx);
+                func.addArguments(new Math.Argument($"x = {from + i * dx}"));
+                calka += func.calculate();
+                func.removeAllArguments();
             }
             calka *= dx;
 
