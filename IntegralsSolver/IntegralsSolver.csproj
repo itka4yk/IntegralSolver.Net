@@ -77,6 +77,7 @@
     <Compile Include="Algorithms\IIntegralStrategy.cs" />
     <Compile Include="Algorithms\LeftSumAlgorithm.cs" />
     <Compile Include="Algorithms\RightSumAlgorithm.cs" />
+    <Compile Include="Algorithms\SimpsonRuleAlgorithm.cs" />
     <Compile Include="Algorithms\TrapezoidAlgorithm.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

@@ -20,13 +20,21 @@ namespace IntegralSolverTests
         [DataRow(-10, 10, 10, "sin(x)", -1.088042222)]
         [TestMethod]
         public async Task ItShouldFindIntegralByRightSumMethod(double from, double to, int n, string func, double result)
-    => Assert.AreEqual(result, await new RightSumAlgorithm().Calculate(from, to, n, new Math.Expression(func)), 1);
+            => Assert.AreEqual(result, await new RightSumAlgorithm().Calculate(from, to, n, new Math.Expression(func)), 1);
 
         [DataRow(0, 10, 10, "x^2+x+1", 395)]
         [DataRow(-10, 10, 10, "x^2+x+1", 700)]
         [DataRow(-10, 10, 10, "sin(x)", 0)]
         [TestMethod]
         public async Task ItShouldFindIntegralByTrapezoidMethod(double from, double to, int n, string func, double result)
-    => Assert.AreEqual(result, await new TrapezoidAlgorithm().Calculate(from, to, n, new Math.Expression(func)), 1);
+            => Assert.AreEqual(result, await new TrapezoidAlgorithm().Calculate(from, to, n, new Math.Expression(func)), 1);
+
+        [DataRow(0, 10, 10, "x^2+x+1", 393.3333)]
+        [DataRow(0, 9, 10, "x^2+x+1", 292.5)]
+        [DataRow(-10, 10, 10, "x^2+x+1", 686.6666)]
+        [DataRow(-10, 10, 10, "sin(x)", 0)]
+        [TestMethod]
+        public async Task ItShouldFindIntegralBySimpsonRuleMethod(double from, double to, int n, string func, double result)
+            => Assert.AreEqual(result, await new SimpsonRuleAlgorithm().Calculate(from, to, n, new Math.Expression(func)), 1);
     }
 }
