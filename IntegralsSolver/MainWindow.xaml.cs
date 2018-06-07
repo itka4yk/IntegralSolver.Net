@@ -59,7 +59,7 @@ namespace IntegralsSolver
             FormulaVariablesStack.Children.Clear();
             _ctx.Formula.VariableNames.ToList().ForEach(v => {
                 FormulaVariablesStack.Children.Add(new Label { Content = v });
-                FormulaVariablesStack.Children.Add(new TextBox { Text = "1.0" });
+                FormulaVariablesStack.Children.Add(new TextBox { Text = "1" });
             });
         }
 
@@ -79,7 +79,7 @@ namespace IntegralsSolver
             var func = new Math.Expression(_ctx.Formula.Representation);
 
             for (var i = 0; i < vars.Count; i++)
-                func.addConstants(new Math.Constant($"{_ctx.Formula.VariableNames[i]} = {Convert.ToDouble(vars[i])}"));
+                func.addConstants(new Math.Constant($"{_ctx.Formula.VariableNames[i]} = {Convert.ToDouble(vars[i]).ToString(CultureInfo.InvariantCulture)}"));
 
             var from = Convert.ToInt32(_ctx.From);
             var to = Convert.ToInt32(_ctx.To);

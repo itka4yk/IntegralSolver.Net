@@ -1,0 +1,10 @@
+[
+  {
+    "Representation": "a*x^2+b*x+c",
+    "VariableNames": [ "a", "b", "c" ]
+  },
+  {
+    "Representation": "sin(x)",
+    "VariableNames": []
+  }
+]
